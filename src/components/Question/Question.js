@@ -1,7 +1,12 @@
 import React from 'react';
 
 const Question = (props) => {
-	let { saveSelection, key, id } = props;
+	let { saveSelection, id, quiz_submitted, answer, selection } = props;
+
+	// when quiz is submitted, calculate results
+	if (quiz_submitted){
+		console.log('RESULTS: #'+id, 'right answer? ', answer===selection, ' ---- ', selection, answer);
+	}
 
 	// save selection on change
 

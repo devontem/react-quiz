@@ -1,20 +1,20 @@
 let questions, 
-	message;
+	message,
+	initialState = { data: [] };
 
-// initialize state
-const QuestionsReducer = (state = { data: [] }, action) => {
+const QuestionsReducer = (state = initialState, action) => {
 	switch (action.type){
 		case 'GET_QUESTIONS':
 			return state;
 		case 'GET_QUESTIONS_PENDING':
-			return { pending: true };
+			return {...state, error: false, pending: true };
 		case 'GET_QUESTIONS_FULFILLED':
 			questions = (action.payload && action.payload.data) ? action.payload.data : []; 
-			return { pending: false, data: questions };
+			return {...state, pending: false, error: false, data: questions };
 		case 'GET_QUESTIONS_REJECTED':
 			message = "There was an error fetching questions";
 			message += (action.payload && action.payload.message) ? `: ${action.payload.message}` : "";
-			return { pending: false, error: true, message: message, data_retrieved: false }
+			return {...state, pending: false, error: true, message: message }
 		default:
 			return state;
 	}
