@@ -2,7 +2,6 @@ let message,
 	answers,
 	initialState = { data: [] };
 
-// initialize state
 const AnswersReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case 'GET_ANSWERS':

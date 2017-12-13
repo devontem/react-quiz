@@ -29,11 +29,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				question_index,
 				answer_index
 			});
-		},
-		updateUserScore: () => {
-			dispatch({
-				type: 'INCREMENT_USER_SCORE'
-			});
 		}
 	}
 };

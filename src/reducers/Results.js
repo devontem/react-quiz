@@ -1,14 +1,13 @@
-var arr;
+var arr,
+	initialState = { selection: [] };
 
 // initialize state
-const ResultsReducer = (state = { selection: [] }, action) => {
+const ResultsReducer = (state = initialState, action) => {
 	switch (action.type){
 		case 'SAVE_SELECTION':
 			arr = [...state.selection]; // copy answer selections
 			arr[action.question_index] = action.answer_index; // overwrite question_index being saved
 			return { selection: arr };
-		case 'INCREMENT_USER_SCORE':
-			return {...state, score: state.score + 1 }
 		default:
 			return state;
 	}

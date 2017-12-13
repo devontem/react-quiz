@@ -1,1 +1,29 @@
-Question.css
+.red {
+	background: #F67D57;
+}
+
+.green {
+	background: #9BD26E;
+}
+
+.quiz {
+	margin: 50px 0px;
+}
+
+.question {
+	margin: 20px 0px ;
+}
+
+.results {
+	margin: 20px 0px;
+}
+
+.green.selection .symbol:before {
+	font-size: 1.3em;
+	content: '✓';
+}
+
+.red.selection .symbol:before {
+	font-size: 1.3em;
+	content: 'x';
+}

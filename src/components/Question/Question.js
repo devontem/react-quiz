@@ -1,25 +1,45 @@
 import React from 'react';
+import './Question.css';
 
 const Question = (props) => {
 	let { saveSelection, id, quiz_submitted, answer, selection } = props;
+	let options, getClasses, hanldeClick;
 
-	// when quiz is submitted, calculate results
-	if (quiz_submitted){
-		console.log('RESULTS: #'+id, 'right answer? ', answer===selection, ' ---- ', selection, answer);
+	// handle saving selection
+	hanldeClick = (e, id, i)=>{
+		e.preventDefault();
+		if (!quiz_submitted) saveSelection(id, i); // only save selection if quiz is not submitted
 	}
 
-	// save selection on change
+	// method to compute necessary css classes
+	getClasses = (index) => {
+		var classes = ''
+		if (quiz_submitted){
+			if (index === selection){
+				classes = 'selection ' + ((selection === answer) ? 'green' : 'red' );
+			} else if (index === answer){
+				classes += 'green'
+			}
+		} else {
+			classes += (index === selection) ? 'active ' : '';
+		}
+		return classes;
+	}
 
-	// lock question on `lock_quiz param`
+	options = props.options.map((item, i) => {
+		return <a href="#" onClick={(e) => hanldeClick(e, id, i)} key={i} className={"list-group-item list-group-item-action flex-column align-items-start " + getClasses.call(this, i) }>
+			    <div className="d-flex w-100 justify-content-between">
+			    	<h5 className="mb-1">{ String.fromCharCode(97+i) }) {item}</h5>
+					<span className="symbol"></span>
 
-	// if `lock_quiz`, show answer && show selection -- compare both
+			    </div>
+			  </a>
+	});
 
 	return (
-		<div>
-			<h3>{props.question}</h3>
-			<ol>
-				{ props.options.map((item, i) => <li onClick={saveSelection.bind(this, id, i)} key={i} className="">{item}</li>)}
-			</ol>
+		<div className="question">
+			<h3>{id+1}) {props.question}</h3>
+			{ options }
 		</div>
 	);
 }
