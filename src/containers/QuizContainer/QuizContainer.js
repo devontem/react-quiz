@@ -27,7 +27,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 						res = res.map((obj, i)=>{
 							return {...obj, correct: obj.answer_index === userResponses[i] };
 						});
-						console.log(res, 'res')
 						resolve({ data: res });
 					});
 				})
