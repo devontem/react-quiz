@@ -35,7 +35,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class QuestionsContainer extends Component {
 	componentWillMount(){
-		console.log(this.props);
 		this.props.getQuestions();
 	}
 
