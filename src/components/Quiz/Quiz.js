@@ -5,6 +5,7 @@ const Quiz = (props) => {
 	let question_components = [], 
 		selection, 
 		answer, 
+		answerObj,
 		total_correct_answers = 0,
 		handleClick,
 		isFormValid;
@@ -12,11 +13,7 @@ const Quiz = (props) => {
 	// handle the submit button 
 	handleClick = () => {
 		isFormValid = (props.results.selection.length === props.questions.data.length && props.results.selection.every((v) => v !== undefined));
-		if (isFormValid){
-			props.getAnswers();
-		} else {
-			alert('Please fill out all fields');
-		}
+		(isFormValid) ? props.getAnswers(props.results.selection) : alert('Please fill out all fields');
 	}
 
 	// set up question components
@@ -24,8 +21,9 @@ const Quiz = (props) => {
 
 		selection = props.results.selection[item.id]; // user selection for question
 		if (props.answers.quiz_submitted) {
-			answer = (props.answers.data.find((obj) => obj.id === item.id) || {}).answer_index; // answer
-			if (selection === answer) total_correct_answers++; // increment counter on right answer
+			answerObj = (props.answers.data.find((obj) => obj.id === item.id) || {});
+			answer = answerObj.answer_index; // answer
+			if (answerObj.correct) total_correct_answers++; // increment counter on right answer
 		}
 
 		return <Question key={item.id} 

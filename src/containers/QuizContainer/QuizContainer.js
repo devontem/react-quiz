@@ -17,10 +17,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				payload: axios.get('/questions.json')
 			});
 		},
-		getAnswers: ()=> {
+		getAnswers: (userResponses)=> {
 			dispatch({
 				type: 'GET_ANSWERS',
-				payload: axios.get('/answers.json')
+				// fake HTTP request
+				payload: new Promise((resolve, reject) => {
+					axios.get('/answers.json').then((answers)=>{
+						var res = answers.data || [];
+						res = res.map((obj, i)=>{
+							return {...obj, correct: obj.answer_index === userResponses[i] };
+						});
+						console.log(res, 'res')
+						resolve({ data: res });
+					});
+				})
 			});
 		},
 		saveSelection: (question_index, answer_index) => {
