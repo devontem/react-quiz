@@ -7,10 +7,10 @@ const QuestionsReducer = (state = initialState, action) => {
 		case 'GET_QUESTIONS':
 			return state;
 		case 'GET_QUESTIONS_PENDING':
-			return {...state, error: false, pending: true };
+			return {...state, error: false, pending: true, message: '' };
 		case 'GET_QUESTIONS_FULFILLED':
 			questions = (action.payload && action.payload.data) ? action.payload.data : []; 
-			return {...state, pending: false, error: false, data: questions };
+			return {...state, pending: false, error: false, data: questions, message: '' };
 		case 'GET_QUESTIONS_REJECTED':
 			message = "There was an error fetching questions";
 			message += (action.payload && action.payload.message) ? `: ${action.payload.message}` : "";
